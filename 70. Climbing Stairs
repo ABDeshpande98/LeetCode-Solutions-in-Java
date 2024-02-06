@@ -1,0 +1,78 @@
+You are climbing a staircase. It takes n steps to reach the top.
+
+Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+
+Example 1:
+
+Input: n = 2
+Output: 2
+Explanation: There are two ways to climb to the top.
+1. 1 step + 1 step
+2. 2 steps
+Example 2:
+
+Input: n = 3
+Output: 3
+Explanation: There are three ways to climb to the top.
+1. 1 step + 1 step + 1 step
+2. 1 step + 2 steps
+3. 2 steps + 1 step
+
+
+Solution Code : 
+======================
+class Solution {
+    public int climbStairs(int n) {
+        
+        if(n == 1){
+            return 1;
+        }
+
+        int[] dp  = new int[n+1];
+
+        dp[1] = 1;
+        dp[2] = 2;
+
+        for(int i = 3; i<=n;i++)
+        {
+            dp[i] = dp[i-1] + dp[i-2];
+        } 
+
+        return dp[n];
+    }
+}
+
+
+Explanation : 
+====================
+Example 1: 1 Step
+
+When you have 1 step, you can only reach the top in one way, which is going from ground floor to first floor.
+
+
+Example 2: 2 Steps
+
+If you have two steps, you can get to the top either by 0–1–2 or 0–2 directly, hence two paths.
+
+You start at 0, you have two options, you take the first step or you don’t take the first step. If you do decide to take the first step, you get to step 1 and then you must take the next step which will take you to the top which is step 2 in this case. This gives you the first way.
+
+Now going back to if you had decided not to take step 1. In this case, you jump directly to step 2 which will give you another way.
+
+
+Example 3: 3 Steps
+
+Let’s look at when you have three steps. You start at 0, you have two options, either you take step 1 or you don’t. If you do decide to take the first step, you will next have to decide the same for step 2. Either you take step 2 or don’t. If you do take step 2, your next step is 3, this is one path.
+
+If you decided not to take step 2, you can directly jump to step 3 since you can take two steps at a time, your second path.
+
+The third path will be when you decide to skip step 1, you jump right to step 2 and then move to step 3.
+
+
+Example 4: 4 Steps
+
+Let’s look at one more example. With Similar analysis as done for Examples 1–3, we can deduce you can reach the top of step 4 in 5 different ways.
+
+
+The pattern we notice here is that n is the sum of (n-1) and (n -2). It’s a Fibonacci sequence!
+
+
